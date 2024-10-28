@@ -13,7 +13,7 @@
     const code = urlParams.get('code');
 
     // Send the code to your Vercel backend endpoint
-    fetch('https://your-vercel-project.vercel.app/api/save_code', {
+    fetch('https://quizify-server.vercel.app/api/save_code', {
         method: 'POST',
         body: JSON.stringify({ code }),
         headers: {
