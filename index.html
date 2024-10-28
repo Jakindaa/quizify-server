@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Authorization</title>
+</head>
+<body>
+<h1>Authorization Successful!</h1>
+<p>You can close this window now.</p>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    // Send the code to your Vercel backend endpoint
+    fetch('https://your-vercel-project.vercel.app/api/save_code', {
+        method: 'POST',
+        body: JSON.stringify({ code }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(response => {
+        if (response.ok) {
+            console.log('Code sent successfully!');
+        } else {
+            console.error('Failed to send code.');
+        }
+    });
+</script>
+</body>
+</html>
+
+     The code above is a simple HTML page that will be displayed
+after the user has authorized your application.
+It extracts the authorization code from the URL and sends it to your Vercel backend endpoint.
+
+     The  fetch  function sends a POST request to the  /api/save_code
+endpoint with the authorization code in the request body.
+
+     The  save_code.js  file in the  api  directory will handle the request and
+save the authorization code to the database.
+     Create a new file named  save_code.js  in the  api  directory and add the following code:
+     // File: api/save_code.js
