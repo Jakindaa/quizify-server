@@ -12,21 +12,25 @@
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
 
-    // Send the code to your Vercel backend endpoint
-    fetch('https://quizify-server.vercel.app/api/save_code', {
-        method: 'POST',
-        body: JSON.stringify({ code }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }).then(response => {
-        if (response.ok) {
-            console.log('Code sent successfully!');
-        } else {
-            console.error('Failed to send code.');
-        }
-    });
+    if (code) {
+        fetch('https://quizify-server.vercel.app/api/save_code', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code }),
+        }).then(response => {
+            if (response.ok) {
+                console.log('Code sent successfully!');
+            } else {
+                console.error('Failed to send code.');
+            }
+        }).catch(error => console.error('Error:', error));
+    } else {
+        console.error('No authorization code found in URL.');
+    }
 </script>
+
 </body>
 </html>
 
